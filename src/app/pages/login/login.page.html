@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>User Login</ion-title>
     <ion-buttons>
-      <ion-button>
+      <ion-button (click)="dismiss()">
         <span class="ion-text-center" color="primary" *ngIf="platform.is('ios')">Cancel</span>
         <ion-icon name="close-outline" *ngIf="platform.is('android')"></ion-icon>
       </ion-button>
@@ -14,15 +14,15 @@
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Phone Number:</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="mobile"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Password:</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
   </ion-list>
   <div padding>
-    <ion-button color="primary" expand="block">Login</ion-button>
+    <ion-button color="primary" expand="block" (click)="login()">Login</ion-button>
   </div>
   <div padding class="ion-text-center">
     <ion-button color="primary" fill="outline">No account? Sign up</ion-button>
