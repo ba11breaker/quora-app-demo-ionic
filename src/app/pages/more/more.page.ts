@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LoginPage } from '../login/login.page';
 
 @Component({
   selector: 'app-more',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MorePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public modalCtrl: ModalController,
+  ) {
+
+  }
 
   ngOnInit() {
+  }
+
+  async showModal() {
+    const modal = await this.modalCtrl.create({
+      component: LoginPage,
+    });
+    return await modal.present();
   }
 
 }
