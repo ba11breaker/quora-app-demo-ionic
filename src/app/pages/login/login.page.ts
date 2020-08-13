@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { UtilsService } from '../../services/utils.service';
+import { RestService } from '../../services/rest.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginPage implements OnInit {
     public platform: Platform,
     public modalCtrl: ModalController,
     public _utils: UtilsService,
+    public _rest: RestService,
   ) { }
 
   ngOnInit() {
@@ -29,9 +31,16 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    console.log('login!');
     const loading = await this._utils.showLoading();
     loading.present();
+    this._rest.login(this.mobile, this.password)
+      .subscribe(async function(res) {
+        if(res['Status']==='OK') {
+
+        } else {
+          const toast = await this._utils.showToast('Can\'t Login!');
+        }
+      });
     await this._utils.hideLoading(loading);
   }
 
