@@ -13,6 +13,7 @@ export class LoginPage implements OnInit {
 
   public mobile: any;
   public password: any;
+  public errorMessage: any;
 
   constructor(
     public platform: Platform,
@@ -31,17 +32,21 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    const loading = await this._utils.showLoading();
-    loading.present();
+    await this._utils.showLoading();
     this._rest.login(this.mobile, this.password)
-      .subscribe(async function(res) {
+      .subscribe(async res => {
         if(res['Status']==='OK') {
 
         } else {
-          const toast = await this._utils.showToast('Can\'t Login!');
+          this._utils.hideLoading();
+          await this._utils.showToast(res['StatusContent']);
         }
+      }, async err => {
+        console.error(err);
+        this._utils.hideLoading();
+        this.errorMessage = err;
       });
-    await this._utils.hideLoading(loading);
+    this._utils.hideLoading();
   }
 
 }

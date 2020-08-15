@@ -7,6 +7,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class UtilsService {
 
+  private loading;
+  private toast;
+
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
@@ -17,19 +20,25 @@ export class UtilsService {
       message: message,
       duration: duration,
     });
-    return loading;
+    this.loading = loading;
+    this.loading.present();
   }
 
-  async hideLoading(loading: any) {
-    const { role, data } = await loading.dismiss();
+  hideLoading() {
+    this.loading.dismiss();
   }
 
-  async showToast(message, duration=5000) {
+  async showToast(message, duration=3000) {
     const toast = await this.toastCtrl.create({
       message: message,
       duration: duration,
       position: 'bottom',
     });
-    return toast;
+    this.toast = toast;
+    this.toast.present();
+  }
+
+  hideToast() {
+    this.toast.dismiss();
   }
 }

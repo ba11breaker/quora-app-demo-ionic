@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
-import { Observable, fromEventPattern } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map, catchError, filter } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+
 
 
 @Injectable({
@@ -44,24 +45,33 @@ export class RestService {
   }
 
   private extractData(res) {
-    let body = res.json();
+    let body = res;
     return JSON.parse(body)  || {};
   }
 
   private handleError(error) {
     let errMsg: string;
-    if(error instanceof Response) {
-      const body = error.json() || '';
+    if(error !== undefined) {
+      const body = error || '';
       const err = body['error'] || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`; 
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return throwError(errMsg);
   }
 
   public login(mobile, password) {
-    return this.getUrlReturn(`${this.apiUrlAnswer}?mobile=${mobile}&password=${password}`);
+    return this.getUrlReturn(`${this.apiUrlLogin}?mobile=${mobile}&password=${password}`);
+  }
+
+  public testrx() {
+    const squareOdd = of(1, 2, 3, 4, 5, 6, 7, 8, 9)
+      .pipe(
+        filter(n => n % 2 !== 0),
+        map(n => n * n),
+      );
+    squareOdd.subscribe(x => console.log(x));
   }
 } 
