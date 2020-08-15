@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,15 @@ export class UtilsService {
   private toast;
 
   constructor(
+    public _platform: Platform,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public _storage: Storage,
   ) { }
+
+  checkPlatform(platform) {
+    return this._platform.is(platform);
+  }
 
   async showLoading(message = 'Loading...', duration = 60000) {
     const loading = await this.loadingCtrl.create({

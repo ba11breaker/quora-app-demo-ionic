@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+    <ion-buttons>
+      <ion-button (click)="dismiss()">
+        <span class="ion-text-center" color="primary" *ngIf="_utils.checkPlatform('ios')">Back</span>
+        <ion-icon name="close-outline" *ngIf="_utils.checkPlatform('android')"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Phone Number:</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nick Name:</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Password:</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Confirmed Password:</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <ion-button color="primary" expand="block">Register</ion-button>
+  </div>
+  <div padding class="ion-text-center">
+    <ion-button color="primary" fill="outline">Have an account? Login now</ion-button>
+  </div>
+</ion-content>

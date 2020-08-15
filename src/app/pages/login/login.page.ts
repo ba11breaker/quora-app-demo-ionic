@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { UtilsService } from '../../services/utils.service';
 import { RestService } from '../../services/rest.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
   constructor(
     public platform: Platform,
     public modalCtrl: ModalController,
+    public navCtrl: NavController,
     public _utils: UtilsService,
     public _rest: RestService,
   ) { }
@@ -53,4 +55,8 @@ export class LoginPage implements OnInit {
       });
   }
 
+  toRegisterPage() {
+    this.dismiss();
+    this.navCtrl.navigateForward(['register']);
+  }
 }
