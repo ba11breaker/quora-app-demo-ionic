@@ -13,6 +13,8 @@ export class MorePage implements OnInit {
   public notLogin: boolean = true;
   public isLogined: boolean = false;
 
+  public modal;
+
   constructor(
     public modalCtrl: ModalController,
     public _utils: UtilsService,
@@ -23,7 +25,7 @@ export class MorePage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     this.loadUserPage();
   }
 
@@ -44,7 +46,15 @@ export class MorePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: LoginPage,
     });
-    return await modal.present();
+    this.modal = modal;
+    await this.modal.present();
+    const { data } = await this.modal.onWillDismiss();
+    const { res } = data;
+    console.log(res);
+    if(res === 'success') {
+      this.notLogin = false;
+      this.isLogined = true;
+    }
   }
 
 }

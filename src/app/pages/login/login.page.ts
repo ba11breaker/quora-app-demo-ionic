@@ -25,9 +25,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  dismiss() {
+  dismiss(message = {}) {
     this.modalCtrl.dismiss({
       'dissmissed': true,
+      ...message,
     });
   }
 
@@ -38,7 +39,9 @@ export class LoginPage implements OnInit {
         if(res['Status']==='OK') {
           this._utils.setStorage('UserId', res['UserId']);
           this._utils.hideLoading();
-          this.dismiss();
+          this.dismiss({
+            res: 'success',
+          });
         } else {
           this._utils.hideLoading();
           await this._utils.showToast(res['StatusContent']);
