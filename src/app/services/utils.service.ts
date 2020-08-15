@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class UtilsService {
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
+    public _storage: Storage,
   ) { }
 
   async showLoading(message = 'Loading...', duration = 60000) {
@@ -40,5 +42,21 @@ export class UtilsService {
 
   hideToast() {
     this.toast.dismiss();
+  }
+
+  setStorage(key: any, value: any) {
+    try{
+      this._storage.set(key, value);
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  getStorage(key: any) {
+    try{
+      return this._storage.get(key);
+    } catch(err) {
+      console.error(err);
+    }
   }
 }

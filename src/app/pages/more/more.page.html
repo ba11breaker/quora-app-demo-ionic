@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="notLogin">
   <ion-card class="login-card ion-text-center">
     <ion-card-header class="ion-text-center">
       Login for more functions
@@ -15,4 +16,12 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
+  </div>
+  <div *ngIf="isLogined">
+    <ion-card>
+      <ion-card-header class="ion-text-center">
+        Loged in
+      </ion-card-header>
+    </ion-card>
+  </div>
 </ion-content>

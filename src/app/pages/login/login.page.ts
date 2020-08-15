@@ -36,17 +36,18 @@ export class LoginPage implements OnInit {
     this._rest.login(this.mobile, this.password)
       .subscribe(async res => {
         if(res['Status']==='OK') {
-
+          this._utils.setStorage('UserId', res['UserId']);
+          this._utils.hideLoading();
+          this.dismiss();
         } else {
           this._utils.hideLoading();
           await this._utils.showToast(res['StatusContent']);
         }
       }, async err => {
         console.error(err);
-        this._utils.hideLoading();
         this.errorMessage = err;
+        this._utils.hideLoading();
       });
-    this._utils.hideLoading();
   }
 
 }
