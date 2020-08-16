@@ -18,10 +18,17 @@
   </ion-card>
   </div>
   <div *ngIf="isLogined">
-    <ion-card>
-      <ion-card-header class="ion-text-center">
-        Loged in
-      </ion-card-header>
-    </ion-card>
+    <ion-list class="profile-list">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="avatarImg" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ userInfo.nickName || 'Default' }}</h2>
+          <p>Check or edit profile</p>
+        </ion-label>
+        <ion-note slot="end">></ion-note>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

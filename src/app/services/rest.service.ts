@@ -69,4 +69,8 @@ export class RestService {
   public register(mobile, nickname, password) {
     return this.getUrlReturn(`${this.apiUrlRegister}?mobile=${mobile}&password=${password}&nickname=${nickname}`);
   }
+
+  public getUserInfo(userId) {
+    return this.getUrlReturn(`${this.apiUrlUserInfo}?userid=${userId}`);
+  }
 } 
