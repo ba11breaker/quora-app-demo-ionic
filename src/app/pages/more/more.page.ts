@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { LoginPage } from '../login/login.page';
 import { UtilsService } from '../../services/utils.service';
 import { RestService } from '../../services/rest.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-more',
@@ -11,16 +12,19 @@ import { RestService } from '../../services/rest.service';
 })
 export class MorePage implements OnInit {
 
+  public UserId: string;
+
   public notLogin: boolean = true;
   public isLogined: boolean = false;
 
   public modal;
 
   public avatarImg: string = 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-  public userInfo: any = 'Perry';
+  public userInfo: any = '';
 
   constructor(
     public modalCtrl: ModalController,
+    public navCtrl : NavController,
     public _utils: UtilsService,
     public _rest: RestService,
   ) {
@@ -37,6 +41,7 @@ export class MorePage implements OnInit {
   loadUserPage() {
     this._utils.getStorage('UserId').then(async val => {
       if (val) {
+        this.UserId = val;
         await this._utils.showLoading('Loading...');
         this._rest.getUserInfo(val)
           .subscribe(res => {
@@ -55,12 +60,12 @@ export class MorePage implements OnInit {
           });
         this.notLogin = false;
         this.isLogined = true;
-      }
-      else {
+      } else {
         this.notLogin = true;
         this.isLogined = false;
+        this.loadUserPage();
       }
-    })
+    });
   }
 
   async showModal() {
@@ -78,4 +83,13 @@ export class MorePage implements OnInit {
     }
   }
 
+  toUserPage() {
+    this.navCtrl.navigateForward(['user'], {
+      queryParams: {
+        id: this.UserId,
+        name: this.userInfo['nickName'],
+        img: this.avatarImg,
+      }
+    });
+  }
 }

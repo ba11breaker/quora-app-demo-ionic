@@ -65,4 +65,8 @@ export class UtilsService {
       console.error(err);
     }
   }
+
+  removeStorage(key: any) {
+    this._storage.remove(key);
+  }
 }

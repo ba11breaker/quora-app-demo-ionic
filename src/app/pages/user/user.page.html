@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Personal Profile</ion-title>
+    <ion-buttons>
+      <ion-button (click)="dismiss()">
+        <span class="ion-text-center" color="primary" *ngIf="_utils.checkPlatform('ios')">Back</span>
+        <ion-icon name="close-outline" *ngIf="_utils.checkPlatform('android')"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="profile-list">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="userInfo.img" />
+      </ion-avatar>
+      <ion-label>
+        <h2>Change avatar</h2>
+      </ion-label>
+      <ion-note slot="end">></ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-list class="profile-list">
+    <ion-item>
+      <ion-label>Edit Nickname:</ion-label>
+      <ion-input type="text" [(ngModel)]="userInfo.name"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding class="ion-text-center">
+    <ion-button color="primary" expand="block" (click)="updateProfile()">Save</ion-button>
+  </div>
+  <div padding  class="ion-text-center">
+    <ion-button color="danger" expand="block" (click)="logout()">Log out</ion-button>
+  </div>
+</ion-content>

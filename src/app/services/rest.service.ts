@@ -73,4 +73,8 @@ export class RestService {
   public getUserInfo(userId) {
     return this.getUrlReturn(`${this.apiUrlUserInfo}?userid=${userId}`);
   }
+
+  updateNickName(userId, nickname) {
+    return this.getUrlReturn(`${this.apiUrlUpdateNickName}?userid=${userId}&nickname=${nickname}`);
+  }
 } 

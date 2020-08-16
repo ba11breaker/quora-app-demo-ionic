@@ -19,7 +19,7 @@
   </div>
   <div *ngIf="isLogined">
     <ion-list class="profile-list">
-      <ion-item>
+      <ion-item (click)="toUserPage()">
         <ion-avatar slot="start">
           <img [src]="avatarImg" />
         </ion-avatar>
