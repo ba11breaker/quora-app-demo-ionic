@@ -66,12 +66,7 @@ export class RestService {
     return this.getUrlReturn(`${this.apiUrlLogin}?mobile=${mobile}&password=${password}`);
   }
 
-  public testrx() {
-    const squareOdd = of(1, 2, 3, 4, 5, 6, 7, 8, 9)
-      .pipe(
-        filter(n => n % 2 !== 0),
-        map(n => n * n),
-      );
-    squareOdd.subscribe(x => console.log(x));
+  public register(mobile, nickname, password) {
+    return this.getUrlReturn(`${this.apiUrlRegister}?mobile=${mobile}&password=${password}&nickname=${nickname}`);
   }
 } 

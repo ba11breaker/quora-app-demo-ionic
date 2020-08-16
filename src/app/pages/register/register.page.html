@@ -14,25 +14,25 @@
   <ion-list>
     <ion-item>
       <ion-label position="stacked">Phone Number:</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="mobile"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Nick Name:</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="nickname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Password:</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password"  [(ngModel)]="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Confirmed Password:</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password"  [(ngModel)]="confirmPassword"></ion-input>
     </ion-item>
   </ion-list>
   <div padding>
-    <ion-button color="primary" expand="block">Register</ion-button>
+    <ion-button color="primary" expand="block" (click)="doRegister()">Register</ion-button>
   </div>
   <div padding class="ion-text-center">
-    <ion-button color="primary" fill="outline">Have an account? Login now</ion-button>
+    <ion-button color="primary" fill="outline" (click)="toLogin()">Have an account? Login now</ion-button>
   </div>
 </ion-content>
